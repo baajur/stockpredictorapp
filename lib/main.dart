@@ -3,6 +3,8 @@ import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'symbols.dart';
+import 'AnalysisPage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:stockapp/symbols.dart';
 
@@ -85,19 +87,45 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  Widget row(Company c){
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Text(c.name,),
-        SizedBox(width: 10.0,),
-        Text(c.symbol),
 
-      ],
+  void sendData(String sym){
+    print("test");
+  }
+
+  Widget row(Company c){
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context){
+              return AnaPage();
+            }
+          )
+        );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(c.symbol,
+            style: GoogleFonts.openSans(
+                textStyle: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold,)
+            ),
+          ),
+          Flexible(
+            child: Text(c.name,
+              style: GoogleFonts.openSans(
+                  textStyle: TextStyle(fontSize: 12.0, color: Colors.black45)
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+
+      )
+        ],
+      )
     );
   }
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contexts) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
